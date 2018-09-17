@@ -1,6 +1,5 @@
 #Trabalhando com Pic-up
 
-
 ##Utilização básica
 No arquivo referente ao layout, deve se utilizar os comandos javaScript para instanciar o pic-up
 
@@ -21,7 +20,7 @@ No arquivo referente ao layout, deve se utilizar os comandos javaScript para ins
 
 Após submeter o formulário, inicie a classe para realizar o upload
 ```php
-$picUp = new PicupYami('imagem');
+$picUp = new Picup('imagem');
 $imagens = $picUp->upload('uploadTest/sub1');
 ``` 
 
@@ -30,13 +29,13 @@ Caso queria fazer um corte, poderá usar o metodo **cut()** da seguinte forma.
 
 simplificando ficaria assim:
 ```php
-$picUp = new PicupYami('imagem');
+$picUp = new Picup('imagem');
 $imagens = $picUp->upload('uploadTest/sub1',  $picUp->cut(500, 500));
 ``` 
 
 caso queria fazer mais de um corte:
 ```php
-$picUp = new PicupYami('imagem');
+$picUp = new Picup('imagem');
 $corte1 = $picUp->upload('uploadTest/sub1',  $picUp->cut(500, 500));
 $corte2 = $picUp->upload('uploadTest/sub1/thumb',  $picUp->cut(100, 100));
 ```

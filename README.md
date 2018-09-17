@@ -10,8 +10,8 @@ No arquivo referente ao layout, deve se utilizar os comandos javaScript para ins
 
 <script>
   $('#pic-up').picup({
-                name: 'imagem'
-            });
+      name: 'imagem'
+  });
 </script>
 ``` 
 
@@ -20,7 +20,7 @@ No arquivo referente ao layout, deve se utilizar os comandos javaScript para ins
 
 Após submeter o formulário, inicie a classe para realizar o upload
 ```php
-$picUp = new Picup('imagem');
+$picUp = new Picup('imagem'); //A string 'imagem' refere-se ao mesmo valor informado no index 'name'
 $imagens = $picUp->upload('uploadTest/sub1');
 ``` 
 
@@ -66,22 +66,22 @@ onde **$folder**, é o caminho onde será feito o upload, **$files** é o array 
  Aqui veremos algumas modificações no padrão normal da execução do pic-up
   ```javascript
   $('#pic-up').picup({
-                 buttonText: 'Escolher imagem',
-                 name: 'imagem',
-                 addFunction: function (img, opt) {
-                     return '<div><div><img src="' + img + '" width="80" /></div>'
-                      + '<div><label>Nome</label> <input name="label['+(opt != undefined ? opt.id : "" )+']" value="'+(opt != undefined && opt.label != undefined ? opt.label : "" )+'" /></div>'
-                         + '</div>';
-                 },
-                 deleteImg: function (content) {
-                    $(content).hide();
-                 },
-                 content: [
-                             {id: 32, img: "http://www.minhaurl.com/imagens/ec193cp84fzbww_1_26296.JPG", label: "teste 32"},
-                             {id: 41, img: "http://www.minhaurl.com/imagens/ec193cp84fzbww_1_26296.JPG", label: "teste 41"},
-                             {id: 33, img: 'http://www.minhaurl.com/imagens/ec193cp89ruoww_1_72676.jpg', label: "teste 33"}
-                         ]
-             });
+     buttonText: 'Escolher imagem',
+     name: 'imagem',
+     addFunction: function (img, opt) {
+         return '<div><div><img src="' + img + '" width="80" /></div>'
+          + '<div><label>Nome</label> <input name="label['+(opt != undefined ? opt.id : "" )+']" value="'+(opt != undefined && opt.label != undefined ? opt.label : "" )+'" /></div>'
+             + '</div>';
+     },
+     deleteImg: function (content) {
+        $(content).hide();
+     },
+     content: [
+                 {id: 32, img: "http://www.minhaurl.com/imagens/ec193cp84fzbww_1_26296.JPG", label: "teste 32"},
+                 {id: 41, img: "http://www.minhaurl.com/imagens/ec193cp84fzbww_1_26296.JPG", label: "teste 41"},
+                 {id: 33, img: 'http://www.minhaurl.com/imagens/ec193cp89ruoww_1_72676.jpg', label: "teste 33"}
+             ]
+   });
 ```
 
 Perceba que temos novos parametros na utilização do pic-up, **buttonText**, **addFunction**, **deleteImg** e **content**.
@@ -103,11 +103,11 @@ Perceba que temos novos parametros na utilização do pic-up, **buttonText**, **
  
  Fazendo dessa forma o retorno na variavel *$_POST['label']* seguindo o exemplo assima será:
   
- ```php
+ ```txt
  $_POST['label'] = array(
-            'new' => array(0 => 'lorem ipsum', 1 => 'dolor')
-            'original' => array( 32 => 'teste 32', 33 => 'teste 33', 41 => 'teste 41')
-   );
+    'new' => array(0 => 'lorem ipsum', 1 => 'dolor')
+    'original' => array( 32 => 'teste 32', 33 => 'teste 33', 41 => 'teste 41')
+ );
  ```
  
 Sendo que em **new => array()** temos os labels das novas imagens, e em **original => array()** as carregadas
@@ -115,7 +115,7 @@ Sendo que em **new => array()** temos os labels das novas imagens, e em **origin
  ## Apagando imagens carregadas
 O pic-up retorna após o submit as imagens que foram marcadas para serem apagadas, elas são retornadas na variavel **$_POST['picup-delete-content']**, que terá um array com o *id* passado e um boleam **0** para não apagar e **1** para apagar
 
-```php
+```txt
 [picup-delete-content] => Array
         (
             [imagem] => Array

@@ -1,6 +1,6 @@
-#Trabalhando com Pic-up
+# Trabalhando com Pic-up
 
-##Utilização básica
+## Utilização básica
 No arquivo referente ao layout, deve se utilizar os comandos javaScript para instanciar o pic-up
 
 
@@ -24,7 +24,7 @@ $picUp = new Picup('imagem');
 $imagens = $picUp->upload('uploadTest/sub1');
 ``` 
 
-##Cortando imagens
+## Cortando imagens
 Caso queria fazer um corte, poderá usar o metodo **cut()** da seguinte forma.
 
 simplificando ficaria assim:
@@ -77,9 +77,9 @@ onde **$folder**, é o caminho onde será feito o upload, **$files** é o array 
                     $(content).hide();
                  },
                  content: [
-                             {id: 32, img: "http://ymi-share-public.s3.amazonaws.com/images/theconcept/skus/ec193cp84fzbww_1_26296.JPG", label: "teste 32"},
-                             {id: 41, img: "http://ymi-share-public.s3.amazonaws.com/images/theconcept/skus/ec193cp84fzbww_1_26296.JPG", label: "teste 41"},
-                             {id: 33, img: 'http://ymi-share-public.s3.amazonaws.com/images/theconcept/skus/ec193cp89ruoww_1_72676.jpg', label: "teste 33"}
+                             {id: 32, img: "http://www.minhaurl.com/imagens/ec193cp84fzbww_1_26296.JPG", label: "teste 32"},
+                             {id: 41, img: "http://www.minhaurl.com/imagens/ec193cp84fzbww_1_26296.JPG", label: "teste 41"},
+                             {id: 33, img: 'http://www.minhaurl.com/imagens/ec193cp89ruoww_1_72676.jpg', label: "teste 33"}
                          ]
              });
 ```

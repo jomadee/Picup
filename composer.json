@@ -1,6 +1,8 @@
 {
   "name": "lliure/picup",
   "description": "Pacote upload de imagens por javascript",
+  "license": "MIT",
+  "keywords": ["picup", "lliure"],
   "require": {
     "php": "^5.3.3 || ^7.0"
   },

@@ -103,7 +103,7 @@ Perceba que temos novos parametros na utilização do pic-up, **buttonText**, **
  
  Fazendo dessa forma o retorno na variavel *$_POST['label']* seguindo o exemplo assima será:
   
- ```txt
+ ```php
  $_POST['label'] = array(
             'new' => array(0 => 'lorem ipsum', 1 => 'dolor')
             'original' => array( 32 => 'teste 32', 33 => 'teste 33', 41 => 'teste 41')
@@ -115,7 +115,7 @@ Sendo que em **new => array()** temos os labels das novas imagens, e em **origin
  ## Apagando imagens carregadas
 O pic-up retorna após o submit as imagens que foram marcadas para serem apagadas, elas são retornadas na variavel **$_POST['picup-delete-content']**, que terá um array com o *id* passado e um boleam **0** para não apagar e **1** para apagar
 
-```txt
+```php
 [picup-delete-content] => Array
         (
             [imagem] => Array

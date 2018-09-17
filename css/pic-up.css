@@ -1,0 +1,22 @@
+body{
+
+}
+
+.pic-up-imagens{
+    }
+
+    .pic-up-imagens > div > button{
+
+        }
+
+    .picup-uplods{
+        display: flex;
+        }
+
+        .picup-uplods > div{
+            border: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            margin: 2px;
+            padding: 2px;
+            }

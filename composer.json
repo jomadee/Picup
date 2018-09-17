@@ -1,0 +1,12 @@
+{
+  "name": "lliure/Picup",
+  "description": "Pacote upload de imagens por javascript",
+  "require": {
+    "php": "^5.3.3 || ^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Picup\\": "./src"
+    }
+  }
+}

@@ -233,16 +233,28 @@ class Picup
 
                     imagecopyresampled($newImg, $oriImg, $novLef, $novTop, 0, 0, $novWid, $novHei, $oriWid, $oriHei);
 
-                    if ($imgExt == 'png')
+                    if ($imgExt == 'png') {
                         imagepng($newImg, null);
-                    else
+                    } else {
                         imagegif($newImg, null);
+                    }
+                    break;
+
+                case 'webp';
+                    imagealphablending($newImg, false);
+                    $corTra = imagecolorallocatealpha($newImg, 0, 0, 0, 127);
+                    imagefill($newImg, 0, 0, $corTra);
+                    imagesavealpha($newImg, true);
+                    imagealphablending($newImg, true);
+
+                    imagecopyresampled($newImg, $oriImg, $novLef, $novTop, 0, 0, $novWid, $novHei, $oriWid, $oriHei);
+                    imagewebp($newImg, null, 100);
                     break;
             }
+            imagedestroy($newImg);
 
             $image_data = ob_get_clean();
             $image_data = base64_encode($image_data);
-
 
             $image['name'] = explode('.', $image['name']);
             array_pop($image['name']);

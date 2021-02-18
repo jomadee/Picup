@@ -1,17 +1,23 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
 header('Content-Type: text/html; charset=utf-8');
-require_once('../class/class.Picup.php');
+require '../vendor/autoload.php';
+
+use Picup\Picup;
 
 
 if(!empty($_POST)){
     $picUp = new Picup('imagem');
 
-    $_POST['label'] = $picUp->filterInput($_POST['label']);
-    $imagens = $picUp->upload('../uploadTest/sub1', $picUp->cut(1000, 1000));
+//    $_POST['label'] = $picUp->filterInput($_POST['label']);
+    $imagens = $picUp->upload('uploadTest', $picUp->cut(500, 500));
 
     echo '<pre>' , print_r($imagens, true) , '</pre>';
 
-    echo '<a href="/pic-up">voltar</a>';
+    echo '<a href="">voltar</a>';
     die();
 }
 
@@ -42,7 +48,7 @@ if(!empty($_POST)){
                     {id: 41, img: "https://upload.wikimedia.org/wikipedia/commons/5/52/Desert_Rose.JPG", label: "teste 41"},
                     {id: 33, img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Orchis_militaris_flowers.jpg/567px-Orchis_militaris_flowers.jpg', label: "teste 33"}
                 ],
-                /*addFunction: function (img, opt) {
+                addFunction: function (img, opt) {
                     return '<div>'
                             +'<div><img src="' + img + '" width="80" /></div>'
                             +'<div>'
@@ -51,7 +57,7 @@ if(!empty($_POST)){
                                 +'<input type="radio" name="principal" />'
                             +'</div>'
                         + '</div>';
-                }*/
+                }
             });
         </script>
     </body>

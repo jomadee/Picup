@@ -6,6 +6,7 @@ class Picup
 
     private $name, $files;
     private $deleted = array();
+    private $type = ['png' => 'image/webp', 'webp' => 'image/webp', 'jpg' => 'image/jpg'];
 
     function __construct($name)
     {
@@ -97,26 +98,29 @@ class Picup
      * "r" = Relativo, a medida que estiver faltando é redimencionada para o valor relativo a original
      * "x" = maXimo, corta pelo tamanho escolhido sem alterar as proporções originais
      *
-     * @param $type
-     *
      * @param string $posfix
      *
      * Exemplo  $picup->cut(200, 200, null, '__thumb');
      * Exemplo2 $picup->cut(400, 400, 'o');
-     *
+     * @param bool $webpForce
      * @return array
      */
-    public function cut($width, $height, $type = null, $posfix = '')
+    public function cut($width, $height, $type = 'p', $posfix = '', $renderOut = false)
     {
+        if($renderOut !== false && !isset($this->type[$renderOut])){
+            $renderOut = false;
+        }
 
         $return = array();
 
-        if ($type == null)
-            $type = 'x';
-
         // Cria uma nova imagem a partir de um arquivo ou URL
         foreach ($this->files[$this->name] as $k => $image) {
-            $imgExt = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+            if($renderOut !== false) {
+                $imgExt = $renderOut;
+                $image['type'] = $this->type[$renderOut];
+            } else {
+                $imgExt = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+            }
 
             $image['file'] = base64_decode($image['file']);
 
@@ -127,7 +131,7 @@ class Picup
             }
 
 
-            if ($imgExt == 'png' || $imgExt == 'gif') {
+            if ($imgExt == 'webp' || $imgExt == 'png' || $imgExt == 'gif') {
                 imagealphablending($oriImg, false);
                 imagesavealpha($oriImg, true);
             }
@@ -248,7 +252,7 @@ class Picup
                     imagealphablending($newImg, true);
 
                     imagecopyresampled($newImg, $oriImg, $novLef, $novTop, 0, 0, $novWid, $novHei, $oriWid, $oriHei);
-                    imagewebp($newImg, null, 100);
+                    imagewebp($newImg, null, 80);
                     break;
             }
             imagedestroy($newImg);
@@ -269,6 +273,12 @@ class Picup
         }
 
         return $return;
+    }
+
+    public function toWebp($w = 1000, $h = 1000){
+        $imagens = self::cut($w, $h, 'p', '', 'webp');
+
+        $this->files[$this->name] = $imagens;
     }
 
     /**

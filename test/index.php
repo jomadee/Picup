@@ -12,8 +12,10 @@ use Picup\Picup;
 if(!empty($_POST)){
     $picUp = new Picup('imagem');
 
-//    $_POST['label'] = $picUp->filterInput($_POST['label']);
-    $imagens = $picUp->upload('uploadTest', $picUp->cut(500, 500));
+    $_POST['label'] = $picUp->filterInput($_POST['label']);
+    $picUp->toWebp();
+
+    $imagens = $picUp->upload('uploadTest', $picUp->cut(200, 200, 'p'));
 
     echo '<pre>' , print_r($imagens, true) , '</pre>';
 

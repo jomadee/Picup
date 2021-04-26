@@ -94,10 +94,10 @@
                     }
 
                     (function(){
-                        var content = $('<div class="picup-content ' + opt.contentClass + '"></div>');
-                        content.append(opt.addFunction(opt.content[vlr].img, opt.content[vlr]));
+                        const content = $('<div>').addClass('picup-content ' +opt.contentClass);
 
                         var inputDelete = $('<input type="text" value="0" name="picup-delete-content['+opt.name+']['+opt.content[vlr].id+']" style="display: none;"/>');
+
                         var buttonDelete = $('<button>', {type: 'button', class: opt.deleteButtonClass}).text('Apagar').click(function(){
                             $(inputDelete).val('1');
                             opt.deleteImg(content);
@@ -105,6 +105,8 @@
 
                         $(content).append('<div class="picup-delete ' + opt.deleteClass + '"></div>');
                         $(content).find('.picup-delete').append([inputDelete, buttonDelete]);
+
+                        content.prepend(opt.addFunction(opt.content[vlr].img, opt.content[vlr]));
 
                         $(html).find('.picup-uplods').append(content);
                     })()

@@ -17,6 +17,7 @@
             return message;
         },
         deleteClass: "",
+        multiplePhotos: true,
         messageClass: "",
         deleteButtonClass: "",
         contentClass: "",
@@ -60,7 +61,19 @@
                 return false;
             }
 
-            var inputFile = '<input type="file" name="picup-files['+opt.name+'][]" multiple="true" style="display: none;" accept="image/*" data-active="true"/>';
+            const inputFile = $('<input>').attr({
+                                    type: "file",
+                                    name: 'picup-files[' + opt.name + '][]',
+                                    accept: "image/*",
+                                    "data-active": "true"
+                                }).css({
+                                    display: "none"
+                                });
+
+            if(opt.multiplePhotos) {
+                inputFile.attr('multiple', 'true')
+            }
+
             var html = $('<div class="picup-block '+opt.blockClass+'"><div class="picup-button"><button type="button">'+opt.buttonText+'</button></div><div class="picup-uplods"></div></div>');
 
             $(this).html(html);

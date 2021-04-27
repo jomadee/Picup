@@ -49,17 +49,24 @@ O método **cut()** recebe 4 argumentos, sendo
     * **p** = Proporcional, mantendo a medida maior da imagem igual a medida menor da thumb
     * **r** = Relativo, a medida que estiver faltando é redimencionada para o valor relativo a original
     * **x** [Padrão] = maXimo, corta pelo tamanho escolhido sem alterar as proporções originais
-* @param array $files
-* @param string $posfix <br>
-    Exemplo:  $picup->cut(200, 200, null, '__thumb'); <br>
+* @param string $posfix 
+* @param string|boolean $renderOut 
+    * Nesse campo pode ser configurado o tipo do arquivo a ser salvo
+  
+    Exemplo:  $picup->cut(200, 200, null, '__thumb', 'webp'); <br>
     Exemplo 2: $picup->cut(400, 400, 'o');
+
+## Método toWebp()
+Método alias do cut, fazendo uma preconfiguração de corte de 500x500 em modo "p" e convertendo para webp
+* @param $w
+* @param $h
 
 ## Método upload()
 O método upload trabalha com dois argumentos sendo
 * @param $folder
 * @param null $files
 
-onde **$folder**, é o caminho onde será feito o upload, **$files** é o array contendo as imagens, esse parametro pode ser **null** assim utilizando os arquivos originais
+Onde **$folder**, é o caminho onde será feito o upload, **$files** é o array contendo as imagens, esse parametro pode ser **null** assim utilizando os arquivos originais
  
  ## Trabalhando com modificações no padrão
  

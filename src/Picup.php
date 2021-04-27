@@ -8,6 +8,10 @@ class Picup
     private $deleted = array();
     private $type = ['png' => 'image/webp', 'webp' => 'image/webp', 'jpg' => 'image/jpg'];
 
+    /**
+     * Picup constructor.
+     * @param $name
+     */
     function __construct($name)
     {
         $this->name = $name;
@@ -19,6 +23,8 @@ class Picup
      */
     private function filterFiles()
     {
+        $this->files[$this->name] = [];
+
         if (isset($_POST['picup-delete'][$this->name]) && isset($_FILES['picup-files']['error'][$this->name])) {
 
             ksort($_POST['picup-delete'][$this->name]);
@@ -102,7 +108,7 @@ class Picup
      *
      * Exemplo  $picup->cut(200, 200, null, '__thumb');
      * Exemplo2 $picup->cut(400, 400, 'o');
-     * @param bool $webpForce
+     * @param bool $renderOut
      * @return array
      */
     public function cut($width, $height, $type = 'p', $posfix = '', $renderOut = false)
@@ -275,6 +281,10 @@ class Picup
         return $return;
     }
 
+    /**
+     * @param int $w
+     * @param int $h
+     */
     public function toWebp($w = 1000, $h = 1000){
         $imagens = self::cut($w, $h, 'p', '', 'webp');
 

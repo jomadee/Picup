@@ -55,8 +55,6 @@
 
         function construct() {
 
-
-
             $(this).closest('form').attr({'enctype': 'multipart/form-data'});
             $(this).addClass('pic-up-imagens');
 
@@ -79,7 +77,6 @@
                 inputFile.attr('multiple', 'true')
             }
 
-
             const picupButton = $('<div>').addClass('picup-button').html('<button type="button">'+opt.buttonText+'</button>');
             const picupUplods = $('<div>').addClass('picup-uploads');
 
@@ -90,11 +87,12 @@
             opt.onLoad();
 
             picupButton.children('button').click(function(){
+
                 if($(html).find('input[type="file"][data-active="true"]').length == 0) {
-                    $(this).before(inputFile);
+                     $(this).before(inputFile.clone());
                 }
 
-                inputFile.click();
+                $(html).find('input[type="file"][data-active="true"]').click();
             });
 
             /** carregamento do conteudo já existente **/
@@ -134,7 +132,6 @@
 
             $(html).on('change', 'input[type="file"][data-active="true"]', function(event){
 
-
                 if(opt.multiplePhotos) {
                     $(this).attr({'data-active': false});
                 } else {
@@ -152,48 +149,54 @@
                             reader.onload = function(f){
 
                                 var returnMessage = "";
-                                var content = $('<div class="picup-content ' + opt.contentClass + '"></div>').attr({'data-idx': 'pc_'+idx});
+                                
+                                var content = $('<div>')
+                                    .attr({'data-idx': 'pc_'+idx})
+                                    .addClass('picup-content ' + opt.contentClass);
+                                
                                 var size = ((f.total/1024)/1024); // em MB
                                 size = parseFloat(size.toFixed(3));
 
                                 content.append(opt.addFunction(f.target.result, {id: 'pc_'+idx}));
 
-                                var inputDelete = $('<input type="text" value="0" name="picup-delete[' + opt.name + '][' + 'pc_' + idx + ']" style="display: none;"/>');
-                                var buttonDelete = $('<button>', {
+                                const inputDelete = $('<input>')
+                                    .attr({type: "hidden", name: 'picup-delete[' + opt.name + '][' + 'pc_' + idx + ']' })
+                                    .val('0');
+
+                                const buttonDelete = $('<button>', {
                                     type: 'button',
                                     class: opt.deleteButtonClass
                                 }).text('Apagar').click(function () {
-                                    $(inputDelete).val('1');
+                                    inputDelete.val('1');
                                     opt.deleteImg(content);
                                 });
 
                                 if(size > opt.maxSize){
                                     if(opt.multiplePhotos) {
-                                        $(inputDelete).val('1');
+                                        inputDelete.val('1');
                                     }
 
                                     returnMessage = opt.messageReturn("A imagem não pode ultrapassar "+opt.maxSize+"MB. Reduza a imagem e tente novamente.", "1", {"size": size})
                                 }
 
                                 if(returnMessage != '') {
-                                    $(content).append('<div class="picup-message ' + opt.messageClass + '"></div>');
-                                    $(content).find('.picup-message').append(returnMessage);
+                                    content.append('<div class="picup-message ' + opt.messageClass + '"></div>');
+                                    content.find('.picup-message').append(returnMessage);
                                 }
 
-                                $(content).append('<div class="picup-delete ' + opt.deleteClass + '"></div>');
-                                $(content).find('.picup-delete').append([inputDelete, buttonDelete]);
+                                content.append('<div class="picup-delete ' + opt.deleteClass + '"></div>');
+                                content.find('.picup-delete').append([inputDelete, buttonDelete]);
 
                                 $(html).find('.picup-uploads').append(content);
                             };
 
                             reader.readAsDataURL(file);
                         })(idx++)
-
-
                     }
                 });
             });
         }
+        
         construct.apply($(context), []);
     };
 

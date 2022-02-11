@@ -6,7 +6,7 @@ class Picup
 
     private $name, $files;
     private $deleted = array();
-    private $type = ['png' => 'image/webp', 'webp' => 'image/webp', 'jpg' => 'image/jpg'];
+    private $type = ['png' => 'image/webp', 'webp' => 'image/webp', 'jpg' => 'image/jpg', 'jpeg' => 'image/jpg'];
 
     /**
      * Picup constructor.
@@ -227,6 +227,7 @@ class Picup
 
             ob_start();
             switch ($imgExt) {
+				case 'jpeg':			
                 case 'jpg':
                     imagecopyresampled($newImg, $oriImg, $novLef, $novTop, 0, 0, $novWid, $novHei, $oriWid, $oriHei);
 
